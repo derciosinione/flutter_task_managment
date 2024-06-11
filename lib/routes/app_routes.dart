@@ -16,7 +16,7 @@ class AppRoutes {
       splash: (context) => const SplashPage(),
       getStarted: (context) => const GetStartedPage(),
       login: (context) => const LoginPage(),
-      // register: (context) => const RegisterPage(),
+      register: (context) => const GetStartedPage(),
     };
   }
 }

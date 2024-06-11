@@ -5,7 +5,7 @@ class AppImages {
   // static const notFound = "assets/images/404Icon.png";
   // static const splashImage = "assets/images/splashImage.png";
   static const getstartedImage = "assets/images/getstartedImg.png";
-  // static const loginImage = "assets/images/loginImg.png";
+  static const loginImage = "assets/images/loginImg.png";
   // static const avatar = "assets/images/avatar1.png";
   // static const wbHomeIntrodution = "assets/images/wbHomeIntrodution.png";
   // static const gamesImage = "assets/images/gamesImage.png";
