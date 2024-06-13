@@ -9,14 +9,14 @@ import '../../shared/components/project_card.dart';
 import '../../themes/app_text_style.dart';
 import '../../utils/utils.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class ProjectScreen extends StatefulWidget {
+  const ProjectScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<ProjectScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<ProjectScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: const AppBottomNavigationBar(itemIndex: 0),
+      bottomNavigationBar: const AppBottomNavigationBar(itemIndex: 3),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

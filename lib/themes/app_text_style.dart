@@ -64,6 +64,12 @@ class AppTextStyles {
     color: AppColors.hintText,
   );
 
+  static final secondaryTitle13 = GoogleFonts.poppins(
+    fontSize: 13,
+    fontWeight: FontWeight.w400,
+    color: AppColors.hintText,
+  );
+
   static final secondaryTitleWithe = GoogleFonts.poppins(
     fontSize: 14,
     fontWeight: FontWeight.w500,

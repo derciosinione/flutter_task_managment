@@ -5,18 +5,17 @@ import 'package:im_task_managment/themes/app_colors.dart';
 import 'package:im_task_managment/utils/app_config.dart';
 
 import '../../shared/components/app_button_navigation_bar.dart';
-import '../../shared/components/project_card.dart';
 import '../../themes/app_text_style.dart';
 import '../../utils/utils.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.notifications);
-              },
+              onPressed: () {},
               icon: const Icon(
                 Icons.notifications,
                 size: 38,
@@ -166,23 +163,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              ListView.builder(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: ProjectCard(),
-                  );
-                },
-              )
+              const SizedBox(height: 50),
+              const Center(
+                  child: Text("Dashboard em desenvolvimento",
+                      textAlign: TextAlign.center))
             ],
           ),
         ),
       ),
-      bottomNavigationBar: const AppBottomNavigationBar(itemIndex: 0),
+      bottomNavigationBar: const AppBottomNavigationBar(itemIndex: 1),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {

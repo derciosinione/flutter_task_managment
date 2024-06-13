@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../../themes/app_colors.dart';
 import '../../themes/app_text_style.dart';
-import '../../utils/app_config.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextFormField extends StatelessWidget {
   final String label;
   final String? hintText;
   final bool? isPassWord;
+  final int maxLines;
   final IconData? prefixIcon;
   final Widget? sufixIcon;
   final TextInputType? textInputType;
@@ -16,7 +17,7 @@ class AppTextField extends StatelessWidget {
   final void Function(String value)? onChanged;
   final void Function()? onEditingComplete;
 
-  const AppTextField({
+  const AppTextFormField({
     super.key,
     required this.label,
     this.hintText,
@@ -29,16 +30,13 @@ class AppTextField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.onEditingComplete,
+    this.maxLines = 1,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(
-        bottom: 12,
-        right: AppConfig.defaultPadding,
-        left: AppConfig.defaultPadding,
-      ),
+      margin: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
         initialValue: initialValue,
         validator: validator,
@@ -46,27 +44,30 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         onChanged: onChanged,
         onEditingComplete: onEditingComplete,
+        maxLines: null,
+        minLines: maxLines,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
-          // contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
-          contentPadding: const EdgeInsets.only(left: 14),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 4.0, horizontal: 18),
+          // contentPadding: const EdgeInsets.only(left: 14),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide.none,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(15),
           ),
           // errorStyle: ,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
           hintText: hintText,
+          hintStyle: AppTextStyles.titleNormal(AppColors.input, 13),
           label: Text(label),
-          prefixIcon: Icon(prefixIcon),
+          labelStyle: AppTextStyles.titleNormal(AppColors.input, 14),
+          prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
           suffixIcon: sufixIcon,
         ),
-        style: AppTextStyles.titleRegular,
-        keyboardType: textInputType ?? TextInputType.text,
-        obscureText: (isPassWord == true) ? true : false,
-        autocorrect: (isPassWord == true) ? false : true,
-        enableSuggestions: (isPassWord == true) ? false : true,
+        style: AppTextStyles.titleNormal(AppColors.blackShape, 15),
+        keyboardType: TextInputType.text,
+        enableSuggestions: true,
       ),
     );
   }

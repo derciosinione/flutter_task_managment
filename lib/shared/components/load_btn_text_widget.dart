@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../themes/app_colors.dart';
-import '../../../themes/app_text_style.dart';
+import '../../themes/app_colors.dart';
+import '../../themes/app_text_style.dart';
 
 Widget loadBtnTextWidget(String title, bool isLoading) {
   return !isLoading
       ? Text(
           title,
-          style: AppTextStyles.titleMedium(AppColors.white, 15),
+          style: AppTextStyles.titleRegularWithe,
         )
       : const SizedBox(
           width: 28,
