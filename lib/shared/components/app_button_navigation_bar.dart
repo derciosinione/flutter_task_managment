@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
-import 'package:wb/shared/routes/app_routes.dart';
 
+import '../../routes/app_routes.dart';
 import 'app_menu_icon.dart';
 
 class AppBottomNavigationBar extends StatefulWidget {
@@ -54,19 +54,19 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
             isActive: _getIndex(0),
           ),
           MenuIcon(
-            onTap: () => _navigator(1, AppRoutes.menu),
-            displayText: "Menu",
-            icon: IconlyBold.category,
+            onTap: () => _navigator(1, AppRoutes.home),
+            displayText: "Dasboard",
+            icon: IconlyBold.chart,
             isActive: _getIndex(1),
           ),
           MenuIcon(
-            onTap: () => _navigator(2, AppRoutes.games),
-            displayText: "Games",
-            icon: IconlyBold.game,
+            onTap: () => _navigator(2, AppRoutes.home),
+            displayText: "Contatos",
+            icon: IconlyBold.user_2,
             isActive: _getIndex(2),
           ),
           MenuIcon(
-            onTap: () => _navigator(3, AppRoutes.notifications),
+            onTap: () => _navigator(3, AppRoutes.home),
             displayText: "Notifications",
             icon: IconlyBold.notification,
             isActive: _getIndex(3),

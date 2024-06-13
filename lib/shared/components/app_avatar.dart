@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wb/shared/themes/app_colors.dart';
+
+import '../../themes/app_colors.dart';
 
 class AppAvatar extends StatelessWidget {
   final String avatar;
-  const AppAvatar({Key? key, required this.avatar}) : super(key: key);
+  const AppAvatar({super.key, required this.avatar});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,10 @@ class AppAvatar extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(2),
-        child: Image.asset(avatar),
+        child: Image.asset(
+          avatar,
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }

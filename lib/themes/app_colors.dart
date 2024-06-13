@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const primary = Color(0xFF6C63FF);
-  static const primaryOpacity = Color(0xFFFFC3AD);
+  static const primaryOpacity = Color(0xFFE5EAFC);
   static const secondary = Color(0xFF585666);
   static const grey = Color(0xFF585666);
   static const brown = Color(0xFFB85A39);
@@ -13,13 +13,12 @@ class AppColors {
   static const purple1 = Color(0xFFB548C6);
   static const purple = Color(0xFF8577C0);
   static const orange = Color(0xFFFF8700);
-  static const green = Color(0xFF22B07D);
+  static const green = Color(0xFF229155);
   static const greenOpacity = Color(0xFFBCEFDD);
   static const lightGreen = Color(0xFF12CDD9);
   static const delete = Color(0xFFE83F5B);
   static const heading = Color(0xFF585666);
   static const heading1 = Color(0xFF839198);
-  static const body = Color(0xFF706E7A);
   static const input = Color(0xFFB1B0B8);
   static const hintText = Color(0xFF959CA5);
   static const stroke = Color(0xFFE3E3E6);
@@ -40,6 +39,7 @@ class AppColors {
   static const blackShape4 = Color(0xFF273240);
   static const secondaryTitle = Color(0xFF959CA5);
   static const white = Color(0xFFFFFFFF);
+  static const body = Color(0xFFF6F6F6);
 
   static const MaterialColor mPrimaryColor = MaterialColor(
     0xFFFF9671,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:im_task_managment/views/home/home_screen.dart';
 
-import '../views/get_started/get_started_page.dart';
+import '../views/get_started/get_started_screen.dart';
 import '../views/login/login_screen.dart';
 import '../views/splash/splash_screen.dart';
 
@@ -10,6 +11,7 @@ class AppRoutes {
   static const getStarted = "/getStarted";
   static const login = "/login";
   static const register = "/register";
+  static const menu = "/menu";
 
   static Map<String, WidgetBuilder> routes(BuildContext context) {
     return {
@@ -17,6 +19,7 @@ class AppRoutes {
       getStarted: (context) => const GetStartedPage(),
       login: (context) => const LoginPage(),
       register: (context) => const GetStartedPage(),
+      home: (context) => const HomeScreen(),
     };
   }
 }

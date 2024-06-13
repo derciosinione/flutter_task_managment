@@ -79,7 +79,7 @@ class AppTextStyles {
   static final titleRegular12 = GoogleFonts.poppins(
     fontSize: 12,
     fontWeight: FontWeight.bold,
-    color: AppColors.brown,
+    color: AppColors.heading,
   );
 
   static final iconTitle = GoogleFonts.poppins(

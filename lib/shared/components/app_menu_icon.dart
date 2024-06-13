@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wb/shared/themes/app_colors.dart';
-import 'package:wb/shared/themes/app_text_style.dart';
+
+import '../../themes/app_colors.dart';
+import '../../themes/app_text_style.dart';
 
 class MenuIcon extends StatelessWidget {
   final String displayText;
@@ -9,12 +10,11 @@ class MenuIcon extends StatelessWidget {
   final VoidCallback? onTap;
 
   const MenuIcon(
-      {Key? key,
+      {super.key,
       this.onTap,
       required this.displayText,
       required this.icon,
-      this.isActive})
-      : super(key: key);
+      this.isActive});
 
   @override
   Widget build(BuildContext context) {
