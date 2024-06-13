@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
+import 'package:im_task_managment/routes/app_routes.dart';
 import 'package:im_task_managment/themes/app_colors.dart';
 import 'package:im_task_managment/utils/app_config.dart';
 
@@ -172,7 +173,9 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: const AppBottomNavigationBar(itemIndex: 0),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AppRoutes.createProject);
+        },
         backgroundColor: AppColors.primary,
         tooltip: "Adicionar novo projeto",
         shape: RoundedRectangleBorder(
