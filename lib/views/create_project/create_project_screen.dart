@@ -10,14 +10,14 @@ import '../../shared/toast_message.dart';
 import '../../themes/app_colors.dart';
 import '../home/home_screen.dart';
 
-class CreateProject extends StatefulWidget {
-  const CreateProject({super.key});
+class CreateProjectScreen extends StatefulWidget {
+  const CreateProjectScreen({super.key});
 
   @override
-  State<CreateProject> createState() => _CreateProjectState();
+  State<CreateProjectScreen> createState() => _CreateProjectState();
 }
 
-class _CreateProjectState extends State<CreateProject> {
+class _CreateProjectState extends State<CreateProjectScreen> {
   late bool isLoading = false;
 
   final service = ProjectService();

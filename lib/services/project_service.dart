@@ -32,6 +32,34 @@ class ProjectService {
     }
   }
 
+  Future<GenericResponse<ProjectModel>> updateProject({
+    required String id,
+    String? name,
+    String? category,
+    String? description,
+    DateTime? dueDate,
+  }) async {
+    try {
+      Map<String, dynamic> updateData = {};
+
+      if (name != null) updateData['name'] = name;
+      if (category != null) updateData['category'] = category;
+      if (description != null) updateData['description'] = description;
+      if (dueDate != null) updateData['dueDate'] = dueDate;
+
+      await _fireStore.collection(_collectionName).doc(id).update(updateData);
+
+      DocumentSnapshot doc =
+          await _fireStore.collection(_collectionName).doc(id).get();
+      ProjectModel updatedProject =
+          ProjectModel.fromJson(doc.data() as Map<String, dynamic>);
+
+      return GenericResponse.success(updatedProject);
+    } catch (e) {
+      return GenericResponse.failure('Error updating project: $e', 400);
+    }
+  }
+
   Future<List<ProjectModel>> getProjects() async {
     try {
       QuerySnapshot querySnapshot =
