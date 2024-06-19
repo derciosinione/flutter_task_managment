@@ -166,7 +166,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ProjectCard(
                       project: _projects[index],
                       onDismissed: () {
-                        //TODO: Implement other logic to delete in fire base
+                        _deleteProject(
+                            _projectService, _projects[index].id, context);
                         setState(() {
                           _projects.removeAt(index);
                         });
@@ -219,5 +220,10 @@ class _HomeScreenState extends State<HomeScreen> {
           context,
           AppRoutes.login,
         ));
+  }
+
+  void _deleteProject(
+      ProjectService service, String id, BuildContext context) async {
+    await service.deleteProject(id: id);
   }
 }

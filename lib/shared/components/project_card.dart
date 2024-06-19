@@ -5,6 +5,7 @@ import 'package:im_task_managment/views/create_project/edit_project_screen.dart'
 
 import '../../models/domain/project_model.dart';
 import '../../routes/app_routes.dart';
+import '../../services/project_service.dart';
 import '../../themes/app_text_style.dart';
 import '../../utils/utils.dart';
 
@@ -20,6 +21,8 @@ class ProjectCard extends StatelessWidget {
     String projectName = project.name.length > 18
         ? '${project.name.substring(0, 18)}...'
         : project.name;
+
+    final service = ProjectService();
 
     return Dismissible(
       key: Key(project.id),
@@ -57,6 +60,7 @@ class ProjectCard extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: () {
+          service.deleteProject(id: project.id);
           print("$projectName selecionado");
           Navigator.pushNamed(
             context,

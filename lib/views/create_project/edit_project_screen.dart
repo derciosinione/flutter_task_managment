@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:im_task_managment/models/domain/project_model.dart';
+import 'package:im_task_managment/models/domain/projects_status.dart';
 import 'package:im_task_managment/services/project_service.dart';
 import 'package:im_task_managment/shared/components/app_text_form_field.dart';
 import 'package:im_task_managment/utils/app_config.dart';
@@ -103,6 +104,7 @@ class _EditProjectState extends State<EditProjectScreen> {
     var response = await service.updateProject(
       id: projectId,
       name: nameController.text,
+      status: ProjectStatus.inProgress,
       description: descriptionController.text,
     );
 

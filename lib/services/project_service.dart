@@ -32,10 +32,20 @@ class ProjectService {
     }
   }
 
+  Future<GenericResponse<void>> deleteProject({required String id}) async {
+    try {
+      await _fireStore.collection(_collectionName).doc(id).delete();
+      return GenericResponse.success(null);
+    } catch (e) {
+      return GenericResponse.failure('Error deleting project: $e', 400);
+    }
+  }
+
   Future<GenericResponse<ProjectModel>> updateProject({
     required String id,
     String? name,
     String? category,
+    String? status,
     String? description,
     DateTime? dueDate,
   }) async {
@@ -46,6 +56,7 @@ class ProjectService {
       if (category != null) updateData['category'] = category;
       if (description != null) updateData['description'] = description;
       if (dueDate != null) updateData['dueDate'] = dueDate;
+      if (status != null) updateData['status'] = status;
 
       await _fireStore.collection(_collectionName).doc(id).update(updateData);
 
