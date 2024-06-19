@@ -3,6 +3,7 @@ import 'package:im_task_managment/views/dashboard/dashboard_screen.dart';
 import 'package:im_task_managment/views/home/home_screen.dart';
 import 'package:im_task_managment/views/member/member_screen.dart';
 import 'package:im_task_managment/views/notifications/notification_screen.dart';
+import 'package:im_task_managment/views/signup/sign_up_screen.dart';
 
 import '../views/create_project/create_project.dart';
 import '../views/get_started/get_started_screen.dart';
@@ -16,7 +17,7 @@ class AppRoutes {
   static const splash = "/splash";
   static const getStarted = "/getStarted";
   static const login = "/login";
-  static const register = "/register";
+  static const signIn = "/sign-in";
   static const createProject = "/create-project";
   static const menu = "/menu";
   static const editProfile = "/menu";
@@ -30,7 +31,7 @@ class AppRoutes {
       splash: (context) => const SplashPage(),
       getStarted: (context) => const GetStartedPage(),
       login: (context) => const LoginPage(),
-      register: (context) => const GetStartedPage(),
+      signIn: (context) => const SignUpScreen(),
       home: (context) => const HomeScreen(),
       createProject: (context) => const CreateProject(),
       editProfile: (context) => const EditProfileScreen(),

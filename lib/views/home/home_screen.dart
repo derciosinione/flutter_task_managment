@@ -3,7 +3,9 @@ import 'package:iconly/iconly.dart';
 import 'package:im_task_managment/routes/app_routes.dart';
 import 'package:im_task_managment/themes/app_colors.dart';
 import 'package:im_task_managment/utils/app_config.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../shared/components/app_button_navigation_bar.dart';
 import '../../shared/components/project_card.dart';
 import '../../themes/app_text_style.dart';
@@ -19,6 +21,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return Scaffold(
       backgroundColor: AppColors.body,
       appBar: AppBar(
@@ -43,10 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, AppRoutes.notifications);
+                //TODO: implement logout
+                Navigator.pushReplacementNamed(
+                  context,
+                  AppRoutes.login,
+                );
               },
+              tooltip: "Sair",
               icon: const Icon(
-                Icons.notifications,
+                IconlyLight.logout,
                 size: 38,
                 color: AppColors.primary,
               ),
@@ -62,9 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Olá, Dércio",
+                    "Olá, ${user!.name}",
                     style: AppTextStyles.titleHome,
                   ),
                   Text(

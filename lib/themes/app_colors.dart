@@ -28,7 +28,7 @@ class AppColors {
   static const lineShapeMenu = Color(0xFFE7E7F6);
   static const shape1 = Color(0xFFFAFAFA);
   static const shape2 = Color(0xFFC4C4C4);
-  static const primaryShape = Color(0xFFFDC8B6);
+  static const primaryShape = Color(0xFFB6B2F4);
   static const orangeShape = Color(0xFFFEA585);
   static const background = Color(0xFFF6F6F6);
   static const menuBackground = Color(0xFFF3F3F8);

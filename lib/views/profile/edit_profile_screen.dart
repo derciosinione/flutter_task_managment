@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:im_task_managment/themes/app_text_style.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../shared/components/app_rounded_elevated_button.dart';
 import '../../shared/components/app_text_form_field.dart';
 import '../../shared/components/button/load_btn_text_widget.dart';
@@ -12,6 +14,9 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final user = userProvider.user;
+
     return Scaffold(
       backgroundColor: AppColors.body,
       appBar: AppBar(
@@ -44,28 +49,28 @@ class EditProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Dercio Sinione Derone",
+                      user!.name,
                       style:
                           AppTextStyles.titleMedium(AppColors.blackShape, 14),
                     ),
                     Text(
-                      "derciosinione@example.com",
+                      user.email,
                       style: AppTextStyles.secondaryTitle13,
                     ),
                   ],
                 ),
               ),
-              const AppTextFormField(
+              AppTextFormField(
                 label: "Nome",
-                initialValue: "Dercio Derone",
+                initialValue: user.name,
               ),
-              const AppTextFormField(
+              AppTextFormField(
                 label: "Email",
-                initialValue: "derciosinione@example.com",
+                initialValue: user.email,
               ),
-              const AppTextFormField(
+              AppTextFormField(
                 label: "Telefone",
-                initialValue: "+351 396 965 656",
+                initialValue: user.phoneNumber,
               ),
               const SizedBox(height: 10),
               AppRoundedElevatedButton(

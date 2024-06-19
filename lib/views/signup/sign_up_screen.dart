@@ -16,15 +16,14 @@ import '../../themes/app_images.dart';
 import '../../themes/app_text_style.dart';
 import '../../validations/user/register_validator.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _LoginPageState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginPageState extends State<SignInScreen> {
-  // final api = AuthManager();
+class _SignUpScreenState extends State<SignUpScreen> {
   final validator = UserValidator();
   final fullNameController = TextEditingController();
   final emailController = TextEditingController();

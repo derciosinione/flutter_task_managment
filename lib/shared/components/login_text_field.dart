@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../themes/app_text_style.dart';
-import '../../utils/app_config.dart';
 
 class AppTextField extends StatelessWidget {
   final String label;
@@ -36,8 +35,6 @@ class AppTextField extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(
         bottom: 12,
-        right: AppConfig.defaultPadding,
-        left: AppConfig.defaultPadding,
       ),
       child: TextFormField(
         initialValue: initialValue,

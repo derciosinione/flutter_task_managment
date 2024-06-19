@@ -2,10 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:wb/services/http/api/auth_manager.dart';
-import 'package:wb/services/http/exceptions/app_http_exception.dart';
-import 'package:wb/shared/components/timeout_tost_message.dart';
-import 'package:wb/shared/components/toast_message.dart';
+
+import '../services/auth_manager.dart';
+import '../services/exception/app_http_exception.dart';
+import '../shared/timeout_tost_message.dart';
+import '../shared/toast_message.dart';
 
 class AuthController {
   static Future<dynamic> login(

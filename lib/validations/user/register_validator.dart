@@ -5,7 +5,7 @@ import '../../models/utils/register_user.dart';
 
 class UserValidator {
   final formKey = GlobalKey<FormState>();
-  RegisterUser model = RegisterUser(roles: ['Player']);
+  RegisterUser model = RegisterUser();
   String _password = '';
 
   String? validateUsername(String? value) {
@@ -21,14 +21,6 @@ class UserValidator {
   String? validateName(String? value) {
     if (value!.isEmpty) {
       return "O nome não pode estar vazio";
-    }
-
-    return null;
-  }
-
-  String? validateSurname(String? value) {
-    if (value!.isEmpty) {
-      return "O sobrenome não pode estar vazio";
     }
 
     return null;
@@ -63,19 +55,15 @@ class UserValidator {
       value != _password ? "As senhas inseridas nao são compatíveis." : null;
 
   void onChange({
-    String? name,
-    String? surname,
-    String? username,
+    String? fullName,
     String? email,
     String? phoneNumber,
     String? password,
     String? rePassword,
   }) {
     model = model.copyWith(
-      username: username,
+      fullName: fullName,
       email: email,
-      firstName: name,
-      lastName: surname,
       password: password,
       phoneNumber: phoneNumber,
       confirmPassword: rePassword,

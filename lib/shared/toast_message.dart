@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wb/shared/themes/app_colors.dart';
-import 'package:wb/shared/themes/app_text_style.dart';
+
+import '../themes/app_colors.dart';
+import '../themes/app_text_style.dart';
 
 class ToastMessage {
   static show(BuildContext context, String msg, Color backgroundColor) {
@@ -23,7 +24,7 @@ class ToastMessage {
       content: Text.rich(
         TextSpan(
           text: "$title \n",
-          style: AppTextStyles.titleNormal(AppColors.primaryShape, 12.5),
+          style: AppTextStyles.titleNormal(AppColors.white, 12.5),
           children: [
             TextSpan(
               text: msg,

@@ -1,46 +1,59 @@
-import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:im_task_managment/services/users_service.dart';
+import 'package:im_task_managment/services/utils/storage_service.dart';
 
-import 'package:wb/services/http/client/dio_client.dart';
-import 'package:wb/services/http/exceptions/app_http_exception.dart';
-import 'package:wb/services/utils/storage_service.dart';
-
-import '../url/routes_url.dart';
+import 'exception/app_http_exception.dart';
 
 class AuthManager {
   Future<dynamic> login(String username, String password) async {
-    var url = Uri.parse(UserUrl.login);
-    final headers = {
-      'Content-Type': 'application/json',
-    };
+    // AppStorage.save("id", responseJson["id"]);
+    // AppStorage.save("token", responseJson["token"]);
 
-    var body = {"username": username, "password": password};
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
 
-    final response =
-        await client.post(url, headers: headers, body: jsonEncode(body));
+      UsersService service = UsersService();
+      var response = await service.getUserData();
 
-    if (response.statusCode == 200) {
-      var responseJson = jsonDecode(response.body);
-      AppStorage.save("id", responseJson["id"]);
-      AppStorage.save("token", responseJson["token"]);
-      return responseJson;
+      if (!response.success) {
+        ExceptionValidation.throwHttpError(401, response.error!);
+      }
+      return response.data;
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          ExceptionValidation.throwHttpError(
+              401, 'The email address is not valid.');
+          break;
+        case 'invalid-credential':
+          ExceptionValidation.throwHttpError(
+              401, 'The provided data is invalid.');
+          break;
+        case 'user-disabled':
+          ExceptionValidation.throwHttpError(
+              401, 'The user account has been disabled.');
+          break;
+        case 'user-not-found':
+          ExceptionValidation.throwHttpError(
+              401, 'No user found with this email.');
+          break;
+        case 'wrong-password':
+          ExceptionValidation.throwHttpError(401, 'Incorrect password.');
+          break;
+        default:
+          ExceptionValidation.throwHttpError(
+              401, 'An unexpected error occurred. Please try again later.');
+      }
+    } catch (e) {
+      ExceptionValidation.throwHttpError(
+          500, 'An unexpected error occurred. Please try again later.');
     }
-
-    ExceptionValidation.throwHttpError(response);
   }
 
   Future<dynamic> logout() async {
-    var url = Uri.parse(UserUrl.logout);
-    final headers = {
-      'Content-Type': 'application/json',
-    };
-
-    final response = await client.post(url, headers: headers);
-
-    if (response.statusCode == 200) {
-      AppStorage.save("token", "");
-      return;
-    }
-
-    ExceptionValidation.throwHttpError(response);
+    AppStorage.save("token", "");
   }
 }

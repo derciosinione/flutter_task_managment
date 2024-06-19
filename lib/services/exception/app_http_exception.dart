@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 
 class AppHttpException implements Exception {
   final String message;
@@ -7,42 +6,26 @@ class AppHttpException implements Exception {
 }
 
 class ExceptionValidation {
-  static void throwHttpError(http.Response response) {
-    throw AppHttpException(_getMessage(response));
+  static void throwHttpError(int statusCode, String message) {
+    throw AppHttpException(_getMessage(statusCode, message));
   }
 
-  static _getMessage(http.Response response) {
-    switch(response.statusCode){
+  static _getMessage(int statusCode, String message) {
+    switch (statusCode) {
       case 400:
-        return jsonEncode(_errorResponse("Bad Request", jsonDecode(response.body)[0]['message']));
+        return jsonEncode(_errorResponse("Bad Request", message));
       case 401:
-        return jsonEncode(_errorResponse(
-            "Invalid Credentials", jsonDecode(response.body)['message']));
+        return jsonEncode(_errorResponse("Invalid Credentials", message));
       case 404:
-        return jsonEncode(_errorResponse("Not Found", response.body));
+        return jsonEncode(_errorResponse("Not Found", message));
       case 500:
         return jsonEncode(_errorResponse(
-            "Error occured while Communication with Server", response.body));
+            "Error occured while Communication with Server", message));
       default:
-        return "${response.statusCode} error detected";
+        return "$statusCode error detected";
     }
   }
 
   static Map<String, String> _errorResponse(String title, String body) =>
       {"title": title, "error": body};
-
-  static String _badRequestMessages(http.Response response) {
-    if (response.statusCode == 400) {
-      var result = jsonDecode(response.body);
-      var errors = result['errors'];
-      var errorMessage = "";
-
-      for (var key in errors.keys) {
-        errorMessage +=
-        "${errors[key]!.map((msg) => "$key: $msg").first};\n";
-      }
-      return errorMessage;
-    }
-    return "";
-  }
 }
