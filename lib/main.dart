@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
         useMaterial3: true,
       ),
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.home,
       routes: AppRoutes.routes(context),
     );
   }

@@ -14,7 +14,7 @@ import '../../shared/components/login_text_field.dart';
 import '../../themes/app_colors.dart';
 import '../../themes/app_images.dart';
 import '../../themes/app_text_style.dart';
-import '../../validations/user/register_validator.dart';
+import '../../validations/register_validator.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

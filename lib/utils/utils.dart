@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 String formatDate(DateTime date) {
   const months = [
     'Janeiro',
@@ -19,4 +21,27 @@ String formatDate(DateTime date) {
   String year = date.year.toString();
 
   return '$month $day, $year';
+}
+
+String formatDateTimeToAgo(DateTime dateTime) {
+  DateTime now = DateTime.now();
+  Duration difference = now.difference(dateTime);
+
+  if (difference.inDays == 0) {
+    if (difference.inHours == 0) {
+      if (difference.inMinutes <= 1) {
+        return 'Agora mesmo';
+      } else {
+        return '${difference.inMinutes} minutos atrás';
+      }
+    } else {
+      return '${difference.inHours} horas atrás';
+    }
+  } else if (difference.inDays == 1) {
+    return 'Ontem';
+  } else if (difference.inDays == 2) {
+    return '2 dias atrás';
+  } else {
+    return DateFormat('dd/MM/yyyy').format(dateTime);
+  }
 }

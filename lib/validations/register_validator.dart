@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart' as validator;
 
-import '../../models/utils/register_user.dart';
+import '../models/utils/register_user.dart';
 
 class UserValidator {
   final formKey = GlobalKey<FormState>();

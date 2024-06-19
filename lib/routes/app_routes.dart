@@ -9,7 +9,6 @@ import '../views/create_project/create_project.dart';
 import '../views/get_started/get_started_screen.dart';
 import '../views/login/login_screen.dart';
 import '../views/profile/edit_profile_screen.dart';
-import '../views/project/project_screen.dart';
 import '../views/splash/splash_screen.dart';
 
 class AppRoutes {
@@ -35,7 +34,7 @@ class AppRoutes {
       home: (context) => const HomeScreen(),
       createProject: (context) => const CreateProject(),
       editProfile: (context) => const EditProfileScreen(),
-      projects: (context) => const ProjectScreen(),
+      projects: (context) => const HomeScreen(),
       notifications: (context) => const NotificationScreen(),
       dashboard: (context) => const DashboardScreen(),
       members: (context) => const MemberScreen(),

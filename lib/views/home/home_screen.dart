@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:im_task_managment/routes/app_routes.dart';
+import 'package:im_task_managment/services/auth_manager.dart';
 import 'package:im_task_managment/themes/app_colors.dart';
 import 'package:im_task_managment/utils/app_config.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/domain/project_model.dart';
 import '../../providers/user_provider.dart';
+import '../../services/project_service.dart';
 import '../../shared/components/app_button_navigation_bar.dart';
 import '../../shared/components/project_card.dart';
 import '../../themes/app_text_style.dart';
@@ -19,10 +22,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final ProjectService _projectService = ProjectService();
+  List<ProjectModel> _projects = [];
+
+  Future<void> _loadProjects() async {
+    try {
+      List<ProjectModel> projects = await _projectService.getProjects();
+      setState(() {
+        _projects = projects;
+      });
+    } catch (e) {
+      print('Error loading projects: $e');
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProjects();
+  }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     final user = userProvider.user;
+    final userName = user?.name ?? "Desconhecido";
 
     return Scaffold(
       backgroundColor: AppColors.body,
@@ -47,13 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: IconButton(
-              onPressed: () {
-                //TODO: implement logout
-                Navigator.pushReplacementNamed(
-                  context,
-                  AppRoutes.login,
-                );
-              },
+              onPressed: () => logOut(context),
               tooltip: "Sair",
               icon: const Icon(
                 IconlyLight.logout,
@@ -76,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Olá, ${user!.name}",
+                    "Olá, $userName",
                     style: AppTextStyles.titleHome,
                   ),
                   Text(
@@ -130,51 +148,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text("Projetos",
-                          style: AppTextStyles.titleSemiBold(
-                              AppColors.blackShape, 14)),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryOpacity,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text("Em Progresso",
-                          style: AppTextStyles.titleRegular),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryOpacity,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child:
-                          Text("Concluídos", style: AppTextStyles.titleRegular),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
-                      margin: const EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryOpacity,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text("Não iniciados",
-                          style: AppTextStyles.titleRegular),
-                    ),
+                    StatusOption(name: "Projectos", color: AppColors.white),
+                    StatusOption(name: "Em Progresso"),
+                    StatusOption(name: "Concluidos"),
+                    StatusOption(name: "Não iniciados"),
                   ],
                 ),
               ),
@@ -182,11 +159,19 @@ class _HomeScreenState extends State<HomeScreen> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 10,
+                itemCount: _projects.length,
                 itemBuilder: (context, index) {
-                  return const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5),
-                    child: ProjectCard(),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    child: ProjectCard(
+                      project: _projects[index],
+                      onDismissed: () {
+                        //TODO: Implement other logic to delete in fire base
+                        setState(() {
+                          _projects.removeAt(index);
+                        });
+                      },
+                    ),
                   );
                 },
               )
@@ -213,5 +198,26 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  Container StatusOption(
+      {required String name, Color color = AppColors.primaryOpacity}) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+      margin: const EdgeInsets.only(right: 10),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(name, style: AppTextStyles.titleRegular),
+    );
+  }
+
+  void logOut(BuildContext context) async {
+    AuthManager auth = AuthManager();
+    await auth.logout().whenComplete(() => Navigator.pushReplacementNamed(
+          context,
+          AppRoutes.login,
+        ));
   }
 }

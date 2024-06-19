@@ -7,7 +7,7 @@ class AppTextFormField extends StatelessWidget {
   final String label;
   final String? hintText;
   final bool? isPassWord;
-  final int maxLines;
+  final int minLines;
   final IconData? prefixIcon;
   final Widget? sufixIcon;
   final TextInputType? textInputType;
@@ -30,7 +30,7 @@ class AppTextFormField extends StatelessWidget {
     this.controller,
     this.onChanged,
     this.onEditingComplete,
-    this.maxLines = 1,
+    this.minLines = 1,
   });
 
   @override
@@ -45,7 +45,7 @@ class AppTextFormField extends StatelessWidget {
         onChanged: onChanged,
         onEditingComplete: onEditingComplete,
         maxLines: null,
-        minLines: maxLines,
+        minLines: minLines,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,

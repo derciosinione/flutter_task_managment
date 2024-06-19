@@ -6,9 +6,6 @@ import 'exception/app_http_exception.dart';
 
 class AuthManager {
   Future<dynamic> login(String username, String password) async {
-    // AppStorage.save("id", responseJson["id"]);
-    // AppStorage.save("token", responseJson["token"]);
-
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: username,
@@ -21,6 +18,8 @@ class AuthManager {
       if (!response.success) {
         ExceptionValidation.throwHttpError(401, response.error!);
       }
+
+      AppStorage.save("id", response.data!.id);
       return response.data;
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -53,7 +52,8 @@ class AuthManager {
     }
   }
 
-  Future<dynamic> logout() async {
-    AppStorage.save("token", "");
+  Future<void> logout() async {
+    await FirebaseAuth.instance.signOut();
+    AppStorage.save("id", "");
   }
 }
