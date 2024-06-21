@@ -60,8 +60,6 @@ class ProjectCard extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: () {
-          service.deleteProject(id: project.id);
-          print("$projectName selecionado");
           Navigator.pushNamed(
             context,
             AppRoutes.editProject,

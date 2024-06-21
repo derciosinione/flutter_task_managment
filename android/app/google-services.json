@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "616641912323",
+    "firebase_url": "https://improjectmanagmentipcb-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "improjectmanagmentipcb",
     "storage_bucket": "improjectmanagmentipcb.appspot.com"
   },
@@ -10,25 +11,6 @@
         "mobilesdk_app_id": "1:616641912323:android:1a6742dc1ae61f428ab836",
         "android_client_info": {
           "package_name": "com.example.imtaskmanagement"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDXdC4Lhun7YR1Npj6-FoR39szEzT1xX0Y"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:616641912323:android:1007f11d7756acd78ab836",
-        "android_client_info": {
-          "package_name": "com.example.taskmanagment"
         }
       },
       "oauth_client": [],
