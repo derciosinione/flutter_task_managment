@@ -26,5 +26,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:616641912323:ios:8adbb495529625578ab836</string>
+	<key>DATABASE_URL</key>
+	<string>https://improjectmanagmentipcb-default-rtdb.europe-west1.firebasedatabase.app</string>
 </dict>
 </plist>

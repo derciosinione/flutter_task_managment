@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:616641912323:android:1a6742dc1ae61f428ab836",
+        "mobilesdk_app_id": "1:616641912323:android:c603cf47bf89b8dc8ab836",
         "android_client_info": {
-          "package_name": "com.example.imtaskmanagement"
+          "package_name": "com.example.im_task_managment"
         }
       },
       "oauth_client": [],
