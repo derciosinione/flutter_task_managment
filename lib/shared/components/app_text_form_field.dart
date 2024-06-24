@@ -7,6 +7,7 @@ class AppTextFormField extends StatelessWidget {
   final String label;
   final String? hintText;
   final bool? isPassWord;
+  final bool readOnly;
   final int minLines;
   final IconData? prefixIcon;
   final Widget? sufixIcon;
@@ -16,22 +17,24 @@ class AppTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String value)? onChanged;
   final void Function()? onEditingComplete;
+  final void Function()? onPrefixTap;
 
-  const AppTextFormField({
-    super.key,
-    required this.label,
-    this.hintText,
-    this.isPassWord,
-    this.prefixIcon,
-    this.sufixIcon,
-    this.textInputType,
-    this.initialValue,
-    this.validator,
-    this.controller,
-    this.onChanged,
-    this.onEditingComplete,
-    this.minLines = 1,
-  });
+  const AppTextFormField(
+      {super.key,
+      required this.label,
+      this.hintText,
+      this.isPassWord,
+      this.prefixIcon,
+      this.sufixIcon,
+      this.textInputType,
+      this.initialValue,
+      this.validator,
+      this.controller,
+      this.onChanged,
+      this.onEditingComplete,
+      this.onPrefixTap,
+      this.minLines = 1,
+      this.readOnly = false});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +46,7 @@ class AppTextFormField extends StatelessWidget {
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: controller,
         onChanged: onChanged,
+        readOnly: readOnly,
         onEditingComplete: onEditingComplete,
         maxLines: null,
         minLines: minLines,
@@ -62,7 +66,12 @@ class AppTextFormField extends StatelessWidget {
           hintStyle: AppTextStyles.titleNormal(AppColors.input, 13),
           label: Text(label),
           labelStyle: AppTextStyles.titleNormal(AppColors.input, 14),
-          prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+          prefixIcon: prefixIcon != null
+              ? GestureDetector(
+                  onTap: onPrefixTap,
+                  child: Icon(prefixIcon),
+                )
+              : null,
           suffixIcon: sufixIcon,
         ),
         style: AppTextStyles.titleNormal(AppColors.blackShape, 15),

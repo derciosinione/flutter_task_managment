@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:im_task_managment/services/project_service.dart';
 import 'package:im_task_managment/shared/components/app_text_form_field.dart';
 import 'package:im_task_managment/utils/app_config.dart';
+import 'package:im_task_managment/utils/utils.dart';
 import 'package:im_task_managment/validations/project_validator.dart';
 
 import '../../shared/components/app_rounded_elevated_button.dart';
@@ -24,10 +25,13 @@ class _CreateProjectState extends State<CreateProjectScreen> {
   final validator = ProjectValidator();
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
+  final dueDateController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
 
   @override
   void initState() {
     isLoading = false;
+    dueDateController.text = formatDateString(selectedDate.toString());
     super.initState();
   }
 
@@ -60,6 +64,28 @@ class _CreateProjectState extends State<CreateProjectScreen> {
                   controller: nameController,
                 ),
                 AppTextFormField(
+                  label: "Data de Entrega",
+                  controller: dueDateController,
+                  prefixIcon: Icons.date_range,
+                  readOnly: true,
+                  onPrefixTap: () async {
+                    final DateTime? date = await showDatePicker(
+                      context: context,
+                      initialDate: selectedDate,
+                      firstDate: DateTime(DateTime.now().year),
+                      lastDate: DateTime(DateTime.now().year + 4),
+                    );
+
+                    if (date != null) {
+                      setState(() {
+                        selectedDate = date;
+                        dueDateController.text =
+                            formatDateString(selectedDate.toString());
+                      });
+                    }
+                  },
+                ),
+                AppTextFormField(
                   label: "Descricao",
                   minLines: 4,
                   controller: descriptionController,
@@ -82,10 +108,12 @@ class _CreateProjectState extends State<CreateProjectScreen> {
 
     _checkIsLoading();
 
+    var dueDate = DateTime.parse(dueDateController.text);
+
     var response = await service.createProject(
-      name: nameController.text,
-      description: descriptionController.text,
-    );
+        name: nameController.text,
+        description: descriptionController.text,
+        dueDate: dueDate);
 
     if (!mounted) return;
 

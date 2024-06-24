@@ -10,6 +10,7 @@ import '../../shared/components/app_rounded_elevated_button.dart';
 import '../../shared/components/button/load_btn_text_widget.dart';
 import '../../shared/toast_message.dart';
 import '../../themes/app_colors.dart';
+import '../../utils/utils.dart';
 import '../home/home_screen.dart';
 
 class EditProjectScreenArguments {
@@ -31,6 +32,9 @@ class _EditProjectState extends State<EditProjectScreen> {
   final validator = ProjectValidator();
   final nameController = TextEditingController();
   final descriptionController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  bool isDateChanged = false;
+  final dueDateController = TextEditingController();
 
   @override
   void initState() {
@@ -45,6 +49,13 @@ class _EditProjectState extends State<EditProjectScreen> {
         as EditProjectScreenArguments;
     nameController.text = args.project.name;
     descriptionController.text = args.project.description;
+
+    if (!isDateChanged) {
+      dueDateController.text =
+          formatDateString(args.project.dueDate.toString());
+    } else {
+      dueDateController.text = formatDateString(selectedDate.toString());
+    }
   }
 
   void _checkIsLoading() {
@@ -79,6 +90,29 @@ class _EditProjectState extends State<EditProjectScreen> {
                   controller: nameController,
                 ),
                 AppTextFormField(
+                  label: "Data de Entrega",
+                  controller: dueDateController,
+                  prefixIcon: Icons.date_range,
+                  readOnly: true,
+                  onPrefixTap: () async {
+                    final DateTime? date = await showDatePicker(
+                      context: context,
+                      initialDate: selectedDate,
+                      firstDate: DateTime(DateTime.now().year),
+                      lastDate: DateTime(DateTime.now().year + 4),
+                    );
+
+                    if (date != null) {
+                      setState(() {
+                        selectedDate = date;
+                        isDateChanged = true;
+                        dueDateController.text =
+                            formatDateString(selectedDate.toString());
+                      });
+                    }
+                  },
+                ),
+                AppTextFormField(
                   label: "Descricao",
                   minLines: 4,
                   controller: descriptionController,
@@ -101,11 +135,14 @@ class _EditProjectState extends State<EditProjectScreen> {
 
     _checkIsLoading();
 
+    var dueDate = DateTime.parse(dueDateController.text);
+
     var response = await service.updateProject(
       id: projectId,
       name: nameController.text,
       status: ProjectStatus.inProgress,
       description: descriptionController.text,
+      dueDate: dueDate,
     );
 
     if (!mounted) return;

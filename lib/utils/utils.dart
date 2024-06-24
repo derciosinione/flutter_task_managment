@@ -23,6 +23,19 @@ String formatDate(DateTime date) {
   return '$month $day, $year';
 }
 
+String formatDateString(String dateString) {
+  List<String> parts = dateString.split('-');
+  if (parts.length != 3) {
+    throw FormatException('Invalid date format');
+  }
+
+  String year = parts[0];
+  String month = parts[1].padLeft(2, '0');
+  String day = parts[2].split(' ')[0].padLeft(2, '0');
+  String formattedDateString = '$year-$month-$day';
+  return formattedDateString;
+}
+
 String formatDateTimeToAgo(DateTime dateTime) {
   DateTime now = DateTime.now();
   Duration difference = now.difference(dateTime);

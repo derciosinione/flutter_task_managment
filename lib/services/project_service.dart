@@ -55,7 +55,7 @@ class ProjectService {
       if (name != null) updateData['name'] = name;
       if (category != null) updateData['category'] = category;
       if (description != null) updateData['description'] = description;
-      if (dueDate != null) updateData['dueDate'] = dueDate;
+      if (dueDate != null) updateData['dueDate'] = dueDate.toString();
       if (status != null) updateData['status'] = status;
 
       await _fireStore.collection(_collectionName).doc(id).update(updateData);
