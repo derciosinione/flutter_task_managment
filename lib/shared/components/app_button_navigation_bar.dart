@@ -44,33 +44,33 @@ class _AppBottomNavigationBarState extends State<AppBottomNavigationBar> {
           topRight: Radius.circular(25),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          MenuIcon(
-            onTap: () => _navigator(0, AppRoutes.home),
-            displayText: "Home",
-            icon: IconlyBold.home,
-            isActive: _getIndex(0),
-          ),
-          MenuIcon(
-            onTap: () => _navigator(1, AppRoutes.dashboard),
-            displayText: "Dasboard",
-            icon: IconlyBold.chart,
-            isActive: _getIndex(1),
-          ),
-          MenuIcon(
-            onTap: () => _navigator(3, AppRoutes.projects),
-            displayText: "Projetos",
-            icon: IconlyBold.ticket_star,
-            isActive: _getIndex(3),
-          ),
-          MenuIcon(
-            onTap: () => _navigator(2, AppRoutes.members),
-            displayText: "Team",
-            icon: IconlyBold.user_2,
-            isActive: _getIndex(2),
-          ),
+          // MenuIcon(
+          //   onTap: () => _navigator(0, AppRoutes.home),
+          //   displayText: "Home",
+          //   icon: IconlyBold.home,
+          //   isActive: _getIndex(0),
+          // ),
+          // MenuIcon(
+          //   onTap: () => _navigator(1, AppRoutes.dashboard),
+          //   displayText: "Dasboard",
+          //   icon: IconlyBold.chart,
+          //   isActive: _getIndex(1),
+          // ),
+          // MenuIcon(
+          //   onTap: () => _navigator(3, AppRoutes.projects),
+          //   displayText: "Projetos",
+          //   icon: IconlyBold.ticket_star,
+          //   isActive: _getIndex(3),
+          // ),
+          // MenuIcon(
+          //   onTap: () => _navigator(2, AppRoutes.members),
+          //   displayText: "Team",
+          //   icon: IconlyBold.user_2,
+          //   isActive: _getIndex(2),
+          // ),
         ],
       ),
     );
