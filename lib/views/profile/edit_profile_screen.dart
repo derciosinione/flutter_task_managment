@@ -20,7 +20,7 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.body,
       appBar: AppBar(
-        title: const Text("Editar Perfil"),
+        title: const Text("Meu Perfil"),
         backgroundColor: AppColors.body,
       ),
       body: Center(
@@ -61,22 +61,25 @@ class EditProfileScreen extends StatelessWidget {
                 ),
               ),
               AppTextFormField(
+                readOnly: true,
                 label: "Nome",
                 initialValue: user.name,
               ),
               AppTextFormField(
+                readOnly: true,
                 label: "Email",
                 initialValue: user.email,
               ),
               AppTextFormField(
+                readOnly: true,
                 label: "Telefone",
                 initialValue: user.phoneNumber,
               ),
               const SizedBox(height: 10),
-              AppRoundedElevatedButton(
-                onPressed: () => {},
-                displayWidget: loadBtnTextWidget("Salvar", false),
-              ),
+              // AppRoundedElevatedButton(
+              //   onPressed: () => {},
+              //   displayWidget: loadBtnTextWidget("Salvar", false),
+              // ),
             ],
           ),
         ),

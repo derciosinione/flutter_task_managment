@@ -112,57 +112,57 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 15),
-              TextField(
-                autofocus: false,
-                decoration: InputDecoration(
-                  hintText: 'Pesquisar',
-                  hintStyle: AppTextStyles.titleNormal(AppColors.input, 14),
-                  contentPadding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10), // Adjust vertical padding to reduce height
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.lineShapeMenu, width: 1.0),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.lineShapeMenu, width: 1.0),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.lineShapeMenu, width: 1.0),
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  suffixIcon: Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    child: const Icon(
-                      IconlyLight.search,
-                      color: AppColors.input,
-                      size: 22,
-                    ),
-                  ),
-                  filled: true,
-                  fillColor: AppColors.white,
-                ),
-                style: AppTextStyles.titleNormal(
-                    AppColors.blackShape4, 14), // Adjust text style
-              ),
+              // TextField(
+              //   autofocus: false,
+              //   decoration: InputDecoration(
+              //     hintText: 'Pesquisar',
+              //     hintStyle: AppTextStyles.titleNormal(AppColors.input, 14),
+              //     contentPadding: const EdgeInsets.symmetric(
+              //         horizontal: 20,
+              //         vertical: 10), // Adjust vertical padding to reduce height
+              //     border: OutlineInputBorder(
+              //       borderSide: const BorderSide(
+              //           color: AppColors.lineShapeMenu, width: 1.0),
+              //       borderRadius: BorderRadius.circular(15.0),
+              //     ),
+              //     enabledBorder: OutlineInputBorder(
+              //       borderSide: const BorderSide(
+              //           color: AppColors.lineShapeMenu, width: 1.0),
+              //       borderRadius: BorderRadius.circular(15.0),
+              //     ),
+              //     focusedBorder: OutlineInputBorder(
+              //       borderSide: const BorderSide(
+              //           color: AppColors.lineShapeMenu, width: 1.0),
+              //       borderRadius: BorderRadius.circular(15.0),
+              //     ),
+              //     suffixIcon: Container(
+              //       margin: const EdgeInsets.only(right: 10),
+              //       child: const Icon(
+              //         IconlyLight.search,
+              //         color: AppColors.input,
+              //         size: 22,
+              //       ),
+              //     ),
+              //     filled: true,
+              //     fillColor: AppColors.white,
+              //   ),
+              //   style: AppTextStyles.titleNormal(
+              //       AppColors.blackShape4, 14), // Adjust text style
+              // ),
               const SizedBox(height: 15),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  // crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    StatusOption(name: "Projectos", color: AppColors.white),
-                    StatusOption(name: "Em Progresso"),
-                    StatusOption(name: "Concluidos"),
-                    StatusOption(name: "Não iniciados"),
-                  ],
-                ),
-              ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     // crossAxisAlignment: CrossAxisAlignment.center,
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       StatusOption(name: "Projectos", color: AppColors.white),
+              //       StatusOption(name: "Em Progresso"),
+              //       StatusOption(name: "Concluidos"),
+              //       StatusOption(name: "Não iniciados"),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(height: 20),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
