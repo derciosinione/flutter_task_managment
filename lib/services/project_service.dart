@@ -10,12 +10,14 @@ class ProjectService {
     String? id,
     String? category,
     required String name,
+    required String userId,
     required String description,
     DateTime? dueDate,
   }) async {
     try {
       ProjectModel project = ProjectModel(
         name: name,
+        userId: userId,
         category: category ?? "TI",
         description: description,
         dueDate: dueDate ?? DateTime.now(),

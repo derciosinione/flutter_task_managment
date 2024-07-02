@@ -3,6 +3,7 @@ import 'package:uuid/uuid.dart';
 
 class ProjectModel {
   final String id;
+  final String userId;
   final String name;
   final String category;
   final String status;
@@ -14,6 +15,7 @@ class ProjectModel {
     String? id,
     String? status,
     DateTime? createdAt,
+    required this.userId,
     required this.name,
     required this.category,
     required this.description,
@@ -26,6 +28,7 @@ class ProjectModel {
     return ProjectModel(
       id: json['id'] ?? const Uuid().v4(),
       name: json['name'] ?? '',
+      userId: json['userId'] ?? '',
       category: json['category'] ?? '',
       description: json['description'] ?? '',
       dueDate: DateTime.parse(json['dueDate']),
@@ -39,6 +42,7 @@ class ProjectModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
+      'userId': userId,
       'name': name,
       'category': category,
       'status': status,

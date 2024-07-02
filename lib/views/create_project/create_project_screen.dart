@@ -4,7 +4,9 @@ import 'package:im_task_managment/shared/components/app_text_form_field.dart';
 import 'package:im_task_managment/utils/app_config.dart';
 import 'package:im_task_managment/utils/utils.dart';
 import 'package:im_task_managment/validations/project_validator.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/user_provider.dart';
 import '../../shared/components/app_rounded_elevated_button.dart';
 import '../../shared/components/button/load_btn_text_widget.dart';
 import '../../shared/toast_message.dart';
@@ -43,6 +45,9 @@ class _CreateProjectState extends State<CreateProjectScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final loggedUser = userProvider.user;
+
     return Scaffold(
       backgroundColor: AppColors.body,
       appBar: AppBar(
@@ -91,7 +96,7 @@ class _CreateProjectState extends State<CreateProjectScreen> {
                   controller: descriptionController,
                 ),
                 AppRoundedElevatedButton(
-                  onPressed: () => _createProject(context),
+                  onPressed: () => _createProject(context, loggedUser!.id),
                   displayWidget: loadBtnTextWidget("Concluir", isLoading),
                 ),
               ],
@@ -102,7 +107,7 @@ class _CreateProjectState extends State<CreateProjectScreen> {
     );
   }
 
-  void _createProject(BuildContext context) async {
+  void _createProject(BuildContext context, String userId) async {
     if (isLoading) return;
     if (!validator.validateForm()) return;
 
@@ -111,6 +116,7 @@ class _CreateProjectState extends State<CreateProjectScreen> {
     var dueDate = DateTime.parse(dueDateController.text);
 
     var response = await service.createProject(
+        userId: userId,
         name: nameController.text,
         description: descriptionController.text,
         dueDate: dueDate);
