@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:im_task_managment/routes/app_routes.dart';
@@ -25,9 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final ProjectService _projectService = ProjectService();
   List<ProjectModel> _projects = [];
 
-  Future<void> _loadProjects() async {
+  Future<void> _loadProjects({required String userId}) async {
     try {
-      List<ProjectModel> projects = await _projectService.getProjects();
+      List<ProjectModel> projects = await _projectService.getProjects(userId: userId);
       setState(() {
         _projects = projects;
       });
@@ -39,7 +41,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _loadProjects();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+      final userId = userProvider.user?.id ?? '';
+      if (userId.isNotEmpty) {
+        _loadProjects(userId: userId);
+      }
+    });
   }
 
   @override

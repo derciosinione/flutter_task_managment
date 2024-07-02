@@ -73,10 +73,13 @@ class ProjectService {
     }
   }
 
-  Future<List<ProjectModel>> getProjects() async {
+  Future<List<ProjectModel>> getProjects({required String userId}) async {
     try {
       QuerySnapshot querySnapshot =
-          await _fireStore.collection(_collectionName).get();
+          await _fireStore.collection(_collectionName)
+              .where('userId', isEqualTo: userId)
+              .get();
+
       return querySnapshot.docs
           .map((doc) =>
               ProjectModel.fromJson(doc.data() as Map<String, dynamic>))
